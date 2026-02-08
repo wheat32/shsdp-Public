@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SHSDP", "SHSDP\SHSDP.csproj", "{A4E9C6A8-5015-4A1E-98CF-0F51C7253993}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SHSDP.API", "SHSDP.API\SHSDP.API.csproj", "{BBAB6A88-54C4-40B6-8CC5-7F2BB694032E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SHSDP.Shared", "SHSDP.Shared\SHSDP.Shared.csproj", "{3CA15BA0-9955-441A-BBFD-F3AE9EF19A50}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A4E9C6A8-5015-4A1E-98CF-0F51C7253993}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4E9C6A8-5015-4A1E-98CF-0F51C7253993}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4E9C6A8-5015-4A1E-98CF-0F51C7253993}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4E9C6A8-5015-4A1E-98CF-0F51C7253993}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBAB6A88-54C4-40B6-8CC5-7F2BB694032E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBAB6A88-54C4-40B6-8CC5-7F2BB694032E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBAB6A88-54C4-40B6-8CC5-7F2BB694032E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBAB6A88-54C4-40B6-8CC5-7F2BB694032E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CA15BA0-9955-441A-BBFD-F3AE9EF19A50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CA15BA0-9955-441A-BBFD-F3AE9EF19A50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CA15BA0-9955-441A-BBFD-F3AE9EF19A50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CA15BA0-9955-441A-BBFD-F3AE9EF19A50}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

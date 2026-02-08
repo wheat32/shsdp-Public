@@ -1,0 +1,48 @@
+export function onLoad()
+{
+    // console.log('Loaded');
+    adjustPosition();
+    window.addEventListener("resize", adjustPosition);
+}
+
+export function onUpdate()
+{
+    // console.log('Updated');
+}
+
+export function onDispose()
+{
+    // console.log('Disposed');
+}
+
+function adjustPosition()
+{
+    const footer = document.querySelector("footer");
+
+    if (footer)
+    {
+        const height = footer.offsetHeight;
+        const themeChangeDropdown = document.getElementById('theme-change-dropdown');
+        if (themeChangeDropdown)
+        {
+            themeChangeDropdown.style.marginBottom = 'calc(' + height + 'px + 1rem)';
+        }
+        else
+        {
+            console.warn("Theme change dropdown not found.");
+        }
+    }
+    else
+    {
+        console.warn("Footer not found.");
+    }
+}
+
+window.addEventListener("blazor:navigation", (e) =>
+{
+    setTimeout(() => adjustPosition(), 10);
+});
+
+setInterval(() => adjustPosition(), 400);
+
+

@@ -1,0 +1,35 @@
+﻿@page "/Error"
+@using System.Diagnostics
+@inherits PageBase
+
+<PageTitle>SH SDP/IT | Error</PageTitle>
+
+<h1 class="text-danger">Error.</h1>
+<h2 class="text-danger">An error occurred while processing your request.</h2>
+
+@if (ShowRequestId)
+{
+    <p>
+        <strong>Request ID:</strong> <code>@RequestId</code>
+    </p>
+}
+
+<p>
+    Please try refreshing the page and repeating your last action. This often resolves the issue.
+</p>
+
+<p>
+    If the problem continues, please reach out to your instructor for assistance.
+</p>
+
+@code
+{
+    [CascadingParameter] private HttpContext? HttpContext { get; set; }
+
+    private String? RequestId { get; set; }
+    private bool ShowRequestId => !String.IsNullOrEmpty(RequestId);
+
+    protected override void OnInitialized() =>
+        RequestId = Activity.Current?.Id ?? HttpContext?.TraceIdentifier;
+
+}

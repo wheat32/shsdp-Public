@@ -1,0 +1,35 @@
+﻿<nav class="nav flex-row mb-4">
+    <div class="nav-item px-2 header">
+        <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+            <h1 class="h3">SH - SDP</h1>
+        </NavLink>
+    </div>
+
+    <div class="nav-item px-2">
+        <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+            <i class="bi bi-house-door-fill me-1"></i> Home
+        </NavLink>
+    </div>
+    
+    <div class="nav-item px-2">
+        <NavLink class="nav-link" href="/GitHubReinvite" Match="NavLinkMatch.All">
+            <i class="bi bi-github me-1"></i> GitHub Re-invite
+        </NavLink>
+    </div>
+    
+    <li class="nav-item dropdown px-2 dropdown-hover">
+        <NavLink class="nav-link dropdown-toggle" href="/Classes">
+            <i class="bi bi-journal-text me-1"></i> Classes
+        </NavLink>
+        <ul class="dropdown-menu">
+            @foreach (PageInfo p in ClassPages)
+            {
+                <li>
+                    <a class="dropdown-item" href="@p.Url">
+                        <i class="bi bi-pc-display-horizontal me-1"></i> @p.DisplayName
+                    </a>
+                </li>
+            }
+        </ul>
+    </li>
+</nav>

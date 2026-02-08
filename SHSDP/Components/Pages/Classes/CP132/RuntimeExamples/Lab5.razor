@@ -1,0 +1,34 @@
+@page "/Classes/CP132/Lab5/"
+@layout TerminalLayout
+@inherits RuntimeExampleBase
+@rendermode InteractiveServer
+
+<PageTitle>SH SDP/IT | Lab 5 – Yahtzee w/ Arrays</PageTitle>
+
+<HeadContent>
+    <link rel="stylesheet" href="css/terminal.css">
+</HeadContent>
+
+<div id="terminal-container"
+     @ref="TerminalDiv"
+     tabindex="0"
+     @onkeydown:preventDefault="true"
+     @onkeydown="HandleKeyDown">
+    @for (int i = 0; i < OutputLines.Count; i++)
+    {
+        String line = OutputLines[i];
+        
+        if(i == OutputLines.Count -1)
+        {
+            <div class="d-flex flex-row">
+                <div class="terminal-line">@((MarkupString)line)</div>
+                <!-- live input line with user typing -->
+                <div>@CurrentInput<span class="cursor"></span></div>
+            </div>
+        }
+        else
+        {
+            <div class="terminal-line">@((MarkupString)line)</div>
+        }
+    }
+</div>

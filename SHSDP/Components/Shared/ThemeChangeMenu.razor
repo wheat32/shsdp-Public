@@ -1,0 +1,33 @@
+<div class="dropdown position-fixed bottom-0 end-0 me-3 bd-mode-toggle" id="theme-change-dropdown">
+    <button class="btn btn-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle Theme" title="Toggle Theme">
+        <i class="bi bi-sun-fill c-sub d-none d-light-only"></i>
+        <i class="bi bi-moon-stars-fill c-sub d-none d-dark-only"></i>
+        <i class="bi bi-circle-half c-sub d-none d-auto-only"></i>
+        <span class="visually-hidden" id="bd-theme-text">Toggle Theme</span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                <i class="bi bi-sun-fill cs me-2"></i>
+                Light Mode
+                <i class="bi bi-check2 ms-auto d-none d-light-only c-sub"></i>
+            </button>
+        </li>
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                <i class="bi bi-moon-stars-fill cs me-2"></i>
+                Dark Mode
+                <i class="bi bi-check2 ms-auto d-none d-dark-only c-sub"></i>
+            </button>
+        </li>
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+                <i class="bi bi-circle-half cs me-2"></i>
+                Auto
+                <i class="bi bi-check2 ms-auto d-none d-auto-only c-sub"></i>
+            </button>
+        </li>
+    </ul>
+</div>
+
+<JavaScriptLoader ScriptPath="Shared/ThemeChangeMenu.razor.js" />

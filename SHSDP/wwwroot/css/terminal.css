@@ -1,0 +1,27 @@
+.cursor::after
+{
+    content: "█";
+    color: #00ff00;
+    animation: blink 1s steps(1) infinite;
+}
+
+/* Stop blinking (and optionally dim) when the terminal is NOT focused */
+#terminal-container:not(:focus) .cursor::after
+{
+    animation-play-state: paused;
+    opacity: 0.4; /* optional dimmed look */
+}
+
+/* Completely disable default focus ring even during prerender/rehydration */
+#terminal-container
+{
+    outline: none !important;
+    border: none;
+    box-shadow: none;
+    height: 100%;
+}
+
+@keyframes blink
+{
+    50% { opacity: 0; }
+}

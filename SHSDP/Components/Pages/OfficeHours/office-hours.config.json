@@ -1,0 +1,14 @@
+{
+  "dayOfWeek": "Wednesday",
+  "startTime": "6:00 PM",
+  "endTime": "7:30 PM",
+  "termStartDate": "12-1-2025",
+  "termEndDate": "3-5-2026",
+  "excludeFirstWeek": true,
+  "excludeLastWeek": true,
+  "daysOff": [
+    "12-24-2025",
+    "12-31-2025"
+  ],
+  "link": "https://teams.microsoft.com/l/meetup-join/19%3ameeting_OTRmY2VlMjgtNzVhNC00ZWYyLWEyYTQtODNjNTQyMDFjM2Zi%40thread.v2/0?context=%7b%22Tid%22%3a%2261a19c3e-7bf3-4d00-937a-d407fcaede1f%22%2c%22Oid%22%3a%2259c9c10f-8617-4c0c-8906-948ae5e35d25%22%7d"
+}

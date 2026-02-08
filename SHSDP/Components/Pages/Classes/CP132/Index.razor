@@ -1,0 +1,83 @@
+@page "/Classes/CP132/"
+@using SHSDP.Shared.Models.API
+@inherits ClassBase
+
+@if (Config == null)
+{
+    <PageTitle>SH SDP/IT | Class</PageTitle>
+    <div class="container my-4">
+        <div class="alert alert-warning">
+            Could not load class configuration.
+        </div>
+    </div>
+}
+else
+{
+    <PageTitle>SH SDP/IT | @Config.Course.CourseCode</PageTitle>
+
+    <div class="container my-4">
+        <div class="row">
+            <!-- Left Column: Header + Resources -->
+            <div class="col-md-8 mb-4">
+                <h1 class="fw-bold">@Config.Course.CourseCode</h1>
+                <h4 class="text-muted">@Config.Course.CourseName</h4>
+
+                <hr class="my-4" />
+
+                <section class="mb-5">
+                    <h3>Course Overview</h3>
+                    <p>
+                        This page serves as the central hub for <strong>@Config.Course.CourseCode</strong>.  
+                        Course materials, announcements, and runtime examples may appear here as they are added.
+                    </p>
+                </section>
+
+                <section>
+                    <h3>Class Resources</h3>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <i class="bi bi-people-fill me-2"></i>
+                            <NavLink href="/OfficeHours" class="text-decoration-none">
+                                Office Hours
+                            </NavLink>
+                        </li>
+                        @if (String.IsNullOrWhiteSpace(Config.Syllabus.SyllabusFilePath) == false)
+                        {
+                            <li class="list-group-item">
+                                <i class="bi bi-file-earmark-text me-2"></i>
+                                <a href="/syllabus/@Config.Syllabus.SyllabusFilePath" target="_blank" class="text-decoration-none">
+                                    Syllabus (@Config.Syllabus.SyllabusYear)
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </section>
+            </div>
+
+            <!-- Right Column: Assignment Runtime Examples -->
+            <div class="col-md-4">
+                <h5 class="fw-semibold mb-3">Assignment Runtime Examples</h5>
+
+                @if (Config.AssignmentRuntime.Count == 0)
+                {
+                    <div class="text-muted small">
+                        No runtime examples are currently available.
+                    </div>
+                }
+                else
+                {
+                    <div class="list-group small">
+                        @foreach (AssignmentRuntime example in Config.AssignmentRuntime)
+                        {
+                            <NavLink href="@example.AssignUrl"
+                                     class="list-group-item list-group-item-action"
+                                     Match="NavLinkMatch.Prefix">
+                                <strong>@example.AssignName</strong>
+                            </NavLink>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}

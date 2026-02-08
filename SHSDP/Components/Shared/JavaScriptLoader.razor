@@ -1,0 +1,32 @@
+@using SHSDP.Utils
+@code 
+{
+    [Parameter]
+    public String ScriptPath { get; set; } = String.Empty;
+
+    private String script = String.Empty;
+
+    protected override void OnInitialized()
+    {
+        if (String.IsNullOrWhiteSpace(ScriptPath))
+        {
+            throw new ArgumentException(nameof(ScriptPath) + " cannot be null or empty.");
+        }
+        if (ScriptPath.Contains('.'))
+        {
+            script = $"./Components/{ScriptPath}";
+        }
+        else if (DebugUtils.IsDebugMode)
+        {
+            script = $"./Components/{ScriptPath}.razor.js";
+        }
+        else
+        {
+            script = $"./Components/{ScriptPath}.razor.min.js";
+        }
+        
+        base.OnInitialized();
+    }
+}
+
+<BlazorPageScript.PageScript Src="@script" />

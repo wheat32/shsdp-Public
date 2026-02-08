@@ -1,0 +1,62 @@
+nav
+{
+    background-color: #2971b9;
+    width: 100%;
+}
+
+.nav-item {
+    font-size: 0.9rem;
+}
+
+    .nav-item ::deep .nav-link {
+        color: #d7d7d7;
+        background: none;
+        border: none;
+        border-radius: 4px;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        line-height: 3rem;
+    }
+
+.nav-item ::deep a.active 
+{
+    color: white;
+}
+
+.nav-item ::deep .nav-link:hover 
+{
+    background-color: rgba(0,0,0,0.1);
+    color: white;
+}
+
+.header ::deep .nav-link
+{
+    background-color: transparent !important;
+}
+
+.header ::deep .nav-link h1
+{
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Show dropdown menu on hover */
+.dropdown-hover:hover > .dropdown-menu 
+{
+    display: block;
+    margin-top: 0;
+}
+
+/* Keep dropdown open when hovering inside it */
+.dropdown-hover .dropdown-menu:hover 
+{
+    display: block;
+}
+
+/* Pointer cursor and transition for smoother UX */
+.dropdown-hover > .nav-link 
+{
+    cursor: pointer;
+    transition: color 0.15s ease-in-out;
+}

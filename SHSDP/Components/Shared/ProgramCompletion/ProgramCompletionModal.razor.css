@@ -1,0 +1,73 @@
+.terminal-modal {
+    box-shadow: 0 8px 32px rgba(41, 113, 185, 0.3);
+}
+
+.terminal-modal .modal-header {
+    border-bottom: 1px solid #2971b9;
+    background: linear-gradient(135deg, #2971b9 0%, #1e5a8e 100%);
+    padding: 1rem 1.5rem;
+}
+
+.terminal-modal .modal-title {
+    font-weight: 600;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+}
+
+.terminal-modal .modal-body {
+    padding: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.terminal-modal .modal-footer {
+    border-top: 1px solid #444;
+    background-color: #252525;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+.terminal-modal .btn-outline-light {
+    border-color: #666;
+    color: #d4d4d4;
+    transition: all 0.3s ease;
+}
+
+.terminal-modal .btn-outline-light:hover {
+    background-color: #444;
+    border-color: #888;
+    color: #fff;
+}
+
+.terminal-modal .btn-success {
+    background: linear-gradient(145deg, #2971b9, #1e5a8e);
+    border: none;
+    color: #ffffff;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(41, 113, 185, 0.4);
+}
+
+.terminal-modal .btn-success:hover {
+    background: linear-gradient(145deg, #1e5a8e, #174a75);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(41, 113, 185, 0.6);
+}
+
+.modal-backdrop.show {
+    opacity: 0.7;
+    background-color: #000;
+}
+
+/* Icon styling */
+.terminal-modal .bi {
+    font-size: 1rem;
+}
+
+.terminal-modal .text-success {
+    color: #4fc3f7 !important;
+}
+

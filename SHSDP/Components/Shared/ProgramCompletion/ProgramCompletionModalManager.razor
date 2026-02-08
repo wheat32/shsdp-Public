@@ -1,0 +1,42 @@
+@using SHSDP.Services
+@rendermode InteractiveServer
+@inject ProgramCompletionService CompletionService
+@inject NavigationManager NavigationManager
+@implements IDisposable
+
+<ProgramCompletionModal 
+    IsVisible="showModal" 
+    OnViewOutput="HideModal" 
+    OnRestart="RestartTerminal" />
+
+@code {
+    private bool showModal = false;
+
+    protected override void OnInitialized()
+    {
+        CompletionService.OnProgramCompleted += ShowModal;
+    }
+
+    private void ShowModal()
+    {
+        showModal = true;
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void HideModal()
+    {
+        showModal = false;
+        StateHasChanged();
+    }
+
+    private void RestartTerminal()
+    {
+        NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+    }
+
+    public void Dispose()
+    {
+        CompletionService.OnProgramCompleted -= ShowModal;
+    }
+}
+

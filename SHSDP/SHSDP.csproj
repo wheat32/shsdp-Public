@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="BlazorPageScript" Version="1.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\lib\bowser\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\SHSDP.Shared\SHSDP.Shared.csproj" />
+    </ItemGroup>
+
+    <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+        <Exec Command="bash &quot;$(ProjectDir)/versioning.sh&quot; &quot;$(Configuration)&quot;" />
+    </Target>
+    
+</Project>

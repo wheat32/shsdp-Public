@@ -1,0 +1,31 @@
+@page "/Classes/"
+
+<PageTitle>SH SDP/IT | Classes</PageTitle>
+
+<div class="container my-4">
+    <div class="text-center mb-5">
+        <h1 class="fw-bold">Class Directory</h1>
+        <p class="lead text-muted">
+            Welcome to the Class Directory.  
+            Each course listed below links to its dedicated page, where you'll find details, resources, and more
+            for that class.  
+            Use this directory to quickly navigate to a course.
+        </p>
+    </div>
+    
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (PageInfo p in ClassPages)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <NavLink href="@p.Url">@p.DisplayName</NavLink>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

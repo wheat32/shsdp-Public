@@ -1,0 +1,257 @@
+@page "/OfficeHours"
+@inherits PageBase
+
+<PageTitle>SH SDP/IT | Office Hours</PageTitle>
+
+<HeadContent>
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta name="googlebot" content="noindex, nofollow, noarchive" />
+    <meta name="AdsBot-Google" content="noindex, nofollow" />
+</HeadContent>
+
+<div class="container-fluid">
+    <div class="hero-section text-center mb-5 p-4">
+        <h1 class="display-4 fw-bold mb-3">
+            <i class="bi bi-calendar-event-fill me-2"></i>
+            Office Hours
+        </h1>
+        <p class="lead text-muted mb-4">
+            Get help with your coursework and projects
+        </p>
+    </div>
+
+    @if (ErrorMessage != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            @ErrorMessage
+        </div>
+    }
+    else if (Config != null)
+    {
+        <div class="row g-4 mb-4">
+            <div class="col-lg-8">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title mb-4">
+                            <i class="bi bi-info-circle-fill text-primary me-2"></i>
+                            Important Information
+                        </h2>
+                        <div class="alert alert-info" role="alert">
+                            <strong><i class="bi bi-lightbulb-fill me-2"></i>Come Prepared!</strong>
+                            <p class="mb-0 mt-2">Students should show up with questions prepared to make the most of your time.</p>
+                        </div>
+                        <div class="alert alert-warning" role="alert">
+                            <strong><i class="bi bi-clock-fill me-2"></i>Time Allocation</strong>
+                            <p class="mb-0 mt-2">Each student will get 10-20 minutes of one-on-one time, depending on how busy it is that day.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title mb-4">
+                            <i class="bi bi-calendar3 text-success me-2"></i>
+                            Schedule
+                        </h2>
+                        <div class="schedule-info">
+                            <div class="row mb-3 pb-2 border-bottom">
+                                <div class="col-sm-4 fw-bold">Day:</div>
+                                <div class="col-sm">@Config.DayOfWeek</div>
+                            </div>
+                            <div class="row mb-3 pb-2 border-bottom">
+                                <div class="col-sm-4 fw-bold">Time:</div>
+                                <div class="col-sm">@Config.StartTime - @Config.EndTime</div>
+                            </div>
+                            <div class="row mb-3 pb-2 border-bottom">
+                                <div class="col-sm-4 fw-bold">Term Period:</div>
+                                <div class="col-sm">@FormattedTermStartDate - @FormattedTermEndDate</div>
+                            </div>
+                        </div>
+
+                        @if (IsFirstWeekExcluded)
+                        {
+                            <div class="alert alert-warning mt-3" role="alert">
+                                <i class="bi bi-exclamation-circle-fill me-2"></i>
+                                <strong>First Week Notice:</strong> Office hours are not held during the first week of the term.
+                            </div>
+                        }
+                        else if (IsLastWeekExcluded)
+                        {
+                            <div class="alert alert-warning mt-3" role="alert">
+                                <i class="bi bi-exclamation-circle-fill me-2"></i>
+                                <strong>Last Week Notice:</strong> Office hours are not held during the last week of the term.
+                            </div>
+                        }
+                        else if (IsDayOff)
+                        {
+                            <div class="alert alert-warning mt-3" role="alert">
+                                <i class="bi bi-exclamation-circle-fill me-2"></i>
+                                <strong>Day Off Notice:</strong> There are no office hours scheduled for today.
+                            </div>
+                        }
+                        else if (!IsWithinSchedule)
+                        {
+                            <div class="alert alert-danger mt-3" role="alert">
+                                <i class="bi bi-x-circle-fill me-2"></i>
+                                <strong>Notice:</strong> Office hours are not currently in session. Please check back during the term period listed above.
+                            </div>
+                        }
+
+                        @if (IsWithinSchedule)
+                        {
+                            <div class="mt-4">
+                                <a href="@Config.Link" target="_blank" class="btn btn-primary btn-lg w-100">
+                                    <i class="bi bi-camera-video-fill me-2"></i>
+                                    Join Office Hours on Teams
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="card shadow-sm" id="teamsSetupCard">
+                    <div class="card-body">
+                        <h2 class="card-title mb-4">
+                            <i class="bi bi-laptop-fill text-info me-2"></i>
+                            Microsoft Teams Setup
+                        </h2>
+                        
+                        <!-- Web Client Section (Primary for Windows/Mac) -->
+                        <div class="mb-4" id="webClientSection">
+                            <h5 class="fw-semibold mb-3">
+                                <i class="bi bi-globe me-2"></i>
+                                Using the Web Client (Recommended)
+                            </h5>
+                            <p>The easiest way to join office hours is through your web browser:</p>
+                            <ol>
+                                <li>Visit <a href="https://teams.microsoft.com" target="_blank">teams.microsoft.com</a> in your web browser</li>
+                                <li>Sign in with your school Microsoft account</li>
+                                <li>Click the "Join Office Hours" button above when office hours are in session</li>
+                            </ol>
+                        </div>
+
+                        <!-- Linux-specific notice -->
+                        <div class="alert alert-warning" id="linuxNotice" style="display: none;">
+                            <strong><i class="bi bi-info-circle-fill me-2"></i>Linux Users:</strong>
+                            If you're using Wayland, it is strongly recommended that you use the Teams for Linux Flatpak instead of the web client for better screen sharing support. See the "Desktop App Installation" section below.
+                        </div>
+
+                        <hr class="my-4" />
+
+                        <!-- Desktop Apps Accordion -->
+                        <div>
+                            <h5 class="fw-semibold mb-3">
+                                <i class="bi bi-download me-2"></i>
+                                Desktop App Installation (Optional)
+                            </h5>
+                            <p class="text-muted small mb-3">Prefer a desktop app? Install the native Teams application for your operating system:</p>
+                            
+                            <div class="accordion" id="teamsAccordion">
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header" id="headingWindows">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWindows" aria-expanded="false" aria-controls="collapseWindows">
+                                            <i class="bi bi-windows me-2"></i> Windows
+                                        </button>
+                                    </h3>
+                                    <div id="collapseWindows" class="accordion-collapse collapse" aria-labelledby="headingWindows" data-bs-parent="#teamsAccordion">
+                                        <div class="accordion-body">
+                                            <ol>
+                                                <li>Download Microsoft Teams from the <a href="https://www.microsoft.com/en-us/microsoft-teams/download-app" target="_blank">official website</a></li>
+                                                <li>Run the installer and follow the on-screen instructions</li>
+                                                <li>Launch Teams and sign in with your school Microsoft account</li>
+                                                <li>Click the "Join Office Hours" button above when office hours are in session</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header" id="headingMac">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMac" aria-expanded="false" aria-controls="collapseMac">
+                                            <i class="bi bi-apple me-2"></i> macOS
+                                        </button>
+                                    </h3>
+                                    <div id="collapseMac" class="accordion-collapse collapse" aria-labelledby="headingMac" data-bs-parent="#teamsAccordion">
+                                        <div class="accordion-body">
+                                            <ol>
+                                                <li>Download Microsoft Teams from the <a href="https://www.microsoft.com/en-us/microsoft-teams/download-app" target="_blank">official website</a> or the Mac App Store</li>
+                                                <li>Open the downloaded .dmg file and drag Teams to your Applications folder</li>
+                                                <li>Launch Teams from Applications and sign in with your school Microsoft account</li>
+                                                <li>Click the "Join Office Hours" button above when office hours are in session</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header" id="headingLinux">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLinux" aria-expanded="false" aria-controls="collapseLinux">
+                                            <i class="bi bi-ubuntu me-2"></i> Linux
+                                        </button>
+                                    </h3>
+                                    <div id="collapseLinux" class="accordion-collapse collapse" aria-labelledby="headingLinux" data-bs-parent="#teamsAccordion">
+                                        <div class="accordion-body">
+                                            <p><strong>Recommended for Linux users, especially if using Wayland:</strong></p>
+                                            <p>Use the <strong>Teams for Linux</strong> Flatpak application for the best experience:</p>
+                                            <ol>
+                                                <li>Ensure you have Flatpak installed on your system</li>
+                                                <li>Visit <a href="https://flathub.org/en/apps/com.github.IsmaelMartinez.teams_for_linux" target="_blank">Teams for Linux on Flathub</a></li>
+                                                <li>Click "Install" and follow the instructions, or run:
+                                                    <pre class="bg-dark text-light p-2 mt-2 rounded"><code>flatpak install flathub com.github.IsmaelMartinez.teams_for_linux</code></pre>
+                                                </li>
+                                                <li>Launch Teams for Linux from your application menu or run:
+                                                    <pre class="bg-dark text-light p-2 mt-2 rounded"><code>flatpak run com.github.IsmaelMartinez.teams_for_linux</code></pre>
+                                                </li>
+                                                <li>Sign in with your school Microsoft account</li>
+                                                <li>Click the "Join Office Hours" button above when office hours are in session</li>
+                                            </ol>
+                                            <div class="alert alert-info mt-3 mb-0">
+                                                <strong>Note:</strong> While the web client works on Linux, Wayland users may experience issues with screen sharing. The Flatpak provides better compatibility.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card shadow-sm sticky-top" style="top: 20px;">
+                    <div class="card-body">
+                        <h3 class="card-title mb-3">
+                            <i class="bi bi-question-circle-fill text-warning me-2"></i>
+                            Quick Tips
+                        </h3>
+                        <ul class="list-unstyled">
+                            <li class="mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Have your questions, code, error messages, etc. ready to share
+                            </li>
+                            <li class="mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Test your microphone before joining
+                            </li>
+                            <li class="mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Be patient - others may be waiting too
+                            </li>
+                            <li class="mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Have specific questions rather than general topics
+                            </li>
+                            <li class="mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Take notes during your session
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<JavaScriptLoader ScriptPath="Pages/OfficeHours/OfficeHours.razor.js" />
